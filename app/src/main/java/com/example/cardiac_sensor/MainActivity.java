@@ -71,8 +71,12 @@ public class MainActivity extends AppCompatActivity {
                         if (result==true) {
                             // Autenticación exitosa
                             // Abre la siguiente actividad
-                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                            //Inicializar una nueva actividad
+
+
+                            Intent intent = new Intent(MainActivity.this, Menu.class);
                             startActivity(intent);
+                            finish();
                             Toast.makeText(MainActivity.this, "BIENN", Toast.LENGTH_SHORT).show();
 
                         } else {
