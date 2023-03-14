@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
       //Establece el color de fondo
         btnLogin.setBackgroundColor(Color.WHITE);
-
         etUsername.setTextColor(Color.BLACK);
         etPassword.setTextColor(Color.BLACK);
         btnLogin.setTextColor(Color.BLACK);

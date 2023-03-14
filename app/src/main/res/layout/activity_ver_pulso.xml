@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VerPulso">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#86E145"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textView_pulso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pulso:"/>
+
+        <EditText
+            android:id="@+id/editText_pulso"
+            android:layout_width="146dp"
+            android:layout_height="58dp"
+            android:hint="PULSO" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/textView_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha:" />
+
+        <EditText
+            android:id="@+id/editText_fecha"
+            android:layout_width="158dp"
+            android:layout_height="54dp"
+            android:hint="13/032023" />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/textView_riesgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Riesgo de infarto:"/>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <EditText
+            android:id="@+id/editText_riesgo"
+            android:layout_width="160dp"
+            android:layout_height="59dp"
+            android:hint="NO"
+            android:minWidth="100dp" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
