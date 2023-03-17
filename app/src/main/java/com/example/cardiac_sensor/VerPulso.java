@@ -1,7 +1,10 @@
 package com.example.cardiac_sensor;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -54,18 +57,25 @@ public class VerPulso extends AppCompatActivity {
 
 
       //Llamar al método cada segundo aquí
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    getDataMovil();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        if(cont!=0) {
+                            getDataMovil();
+                        }
+                        else {
+                            cont++;
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-        };
-        Timer timer = new Timer();
-        timer.schedule(task, 0, 1000);
+            };
+            Timer timer = new Timer();
+            timer.schedule(task, 0, 1000);
+
     }
 
 
@@ -78,19 +88,29 @@ public class VerPulso extends AppCompatActivity {
             @Override
             public void onResponse(Call<Pulso> call, Response<Pulso> response) {
                 if (response.isSuccessful()) {
-                    if(cont!=0) {
+
                         // aquí obtienes la respuesta
                         result = response.body();
+
+                        if(result.getCantpulsaciones()<90)
+                        {
+                            lanzarNotificacion(89);
+                        }
+                        else if(result.getCantpulsaciones()>91 && result.getCantpulsaciones()<100)
+                        {
+                            lanzarNotificacion(100);
+                        }else
+                        {
+                            //paro cardiaco
+                            lanzarNotificacion(100);
+                        }
+
 
                             et_pulso.setText(result.getCantpulsaciones().toString());
                             et_fecha.setText(result.getFechademedicion().toString());
                             et_riesgoInfarto.setText(result.getRiesgoDeInfarto().toString());
 
-                    }
-                    else
-                    {
-                        cont++;
-                    }
+
 
                 } else {
                     // aquí obtienes un código de error
@@ -107,5 +127,35 @@ public class VerPulso extends AppCompatActivity {
         });
 
         return lista;
+    }
+
+
+    public void lanzarNotificacion(Integer cant){
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+        if(cant==89)
+        {
+            // Configuración de la notificación
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "default")
+                    .setSmallIcon(R.drawable.alerta)
+                    .setContentTitle("Notificación")
+                    .setContentText("CUIDADO CON LA PRESION ARTERIAL")
+                    .setAutoCancel(true);
+            // Enviar la notificación
+            notificationManager.notify(0, notificationBuilder.build());
+        }
+        else if(cant==100)
+        {
+            // Configuración de la notificación
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "default")
+                    .setSmallIcon(R.drawable.alerta)
+                    .setContentTitle("Notificación")
+                    .setContentText("CUIDADO PELIGRO DE INFARTO")
+                    .setAutoCancel(true);
+            // Enviar la notificación
+            notificationManager.notify(0, notificationBuilder.build());
+        }
+
     }
 }
