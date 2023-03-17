@@ -17,7 +17,8 @@
             android:id="@+id/textView_pulso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pulso:"/>
+            android:text="Pulso:"
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/editText_pulso"
@@ -32,13 +33,14 @@
             android:id="@+id/textView_fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha:" />
+            android:text="Fecha:"
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/editText_fecha"
             android:layout_width="158dp"
             android:layout_height="54dp"
-            android:hint="13/032023" />
+            android:hint="13/03/2023" />
         <View
             android:layout_width="wrap_content"
             android:layout_height="50dp" />
@@ -46,7 +48,8 @@
             android:id="@+id/textView_riesgo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Riesgo de infarto:"/>
+            android:text="Riesgo de infarto:"
+            android:textSize="20sp"/>
         <View
             android:layout_width="wrap_content"
             android:layout_height="50dp" />

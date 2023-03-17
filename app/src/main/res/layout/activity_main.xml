@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_green_light"
+        android:background="#68B36B"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -40,7 +40,9 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:background="#698F42"
+            android:text="INGRESAR"
+            android:textColor="#000000" />
 
 
     </LinearLayout>

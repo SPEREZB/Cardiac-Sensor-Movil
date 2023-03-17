@@ -31,12 +31,11 @@ public class VerPulso extends AppCompatActivity {
     private EditText et_riesgoInfarto;
     Pulso result= new Pulso();
     List lista= new ArrayList<>();
-    TextView tv_pulso;
+    TextView tv_pulso,tv_fecha,tv_riesgoInfarto;
+    int cont=0;
+
     //Crear una instancia de Timer
     Timer timer = new Timer();
-
-
-
 
 
     @Override
@@ -44,21 +43,20 @@ public class VerPulso extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_pulso);
 
+        tv_pulso = findViewById(R.id.textView_pulso);
+        tv_fecha = findViewById(R.id.textView_fecha);
+        tv_riesgoInfarto = findViewById(R.id.textView_riesgo);
+
         et_pulso = (EditText) findViewById(R.id.editText_pulso);
         et_fecha = (EditText) findViewById(R.id.editText_fecha);
         et_riesgoInfarto = (EditText) findViewById(R.id.editText_riesgo);
 
 
-        tv_pulso = findViewById(R.id.textView_pulso);
-        TextView tv_fecha = findViewById(R.id.textView_fecha);
-        TextView tv_riesgoInfarto = findViewById(R.id.textView_riesgo);
 
-
-        //Crear una instancia de TimeTask
-        TimerTask timerTask = new TimerTask() {
+      //Llamar al método cada segundo aquí
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                //Llamar al método cada segundo aquí
                 try {
                     getDataMovil();
                 } catch (IOException e) {
@@ -66,18 +64,9 @@ public class VerPulso extends AppCompatActivity {
                 }
             }
         };
-
-        //Ejecutar el método cada segundo
-        timer.scheduleAtFixedRate(timerTask, 0, 1000);
-
-       /* tv_pulso.setText(result.get(0).toString());
-        tv_fecha.setText("FECHA");
-        tv_riesgoInfarto.setText("RIESGO DE INFARTO");*/
-
-
+        Timer timer = new Timer();
+        timer.schedule(task, 0, 1000);
     }
-
-
 
 
     private List getDataMovil() throws IOException {
@@ -89,11 +78,20 @@ public class VerPulso extends AppCompatActivity {
             @Override
             public void onResponse(Call<Pulso> call, Response<Pulso> response) {
                 if (response.isSuccessful()) {
-                    // aquí obtienes la respuesta
-                    result = response.body();
+                    if(cont!=0) {
+                        // aquí obtienes la respuesta
+                        result = response.body();
 
+                            et_pulso.setText(result.getCantpulsaciones().toString());
+                            et_fecha.setText(result.getFechademedicion().toString());
+                            et_riesgoInfarto.setText(result.getRiesgoDeInfarto().toString());
 
-                  tv_pulso.setText(result.getCantpulsaciones().toString());
+                    }
+                    else
+                    {
+                        cont++;
+                    }
+
                 } else {
                     // aquí obtienes un código de error
                     int errorCode = response.code();
